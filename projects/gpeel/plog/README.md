@@ -1,8 +1,9 @@
 # Colorful logs with @gpeel/plog
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 22.0.2
 
-- For Angular 18 use @gpeel/plog 17+ which enabled providePlog(plogConfig) and also keeps PlogModule.forRoot(plogConfig)
+- For Angular 22+ use @gpeel/plog@22 which enabled providePlog(plogConfig) and also keeps PlogModule.forRoot(plogConfig)
+- For Angular 18 to 21 use @gpeel/plog@17 which enabled providePlog(plogConfig) and also keeps PlogModule.forRoot(plogConfig)
 - For Angular 16 use @gpeel/plog 16.6.0
 - For Angular 12 to 15 => use @gpeel/plog 12.2.0
 - For Angular 11.x.y => use @gpeel/plog@11.0.1 (last version for angular 11)
@@ -11,6 +12,7 @@ npm repo:
 https://www.npmjs.com/package/@gpeel/plog
 
 Github repo at :
+https://github.com/gpeel/gpeel-plog-ng22
 https://github.com/gpeel/gpeel-plog-ng17
 
 ![img.png](colorful.jpg)
@@ -145,13 +147,13 @@ export const PLOG_CONFIG_DEFAULT = {
   cache: ['color:blueviolet', 'CACHE'],
 
   signal: ['color:blueviolet', 'SIGNALS'],
-  siEffect: ['color:blueviolet', 'SIGNALS-EFFECT'],
-  siEffectCleanup: ['color:blueviolet', 'SIGNALS-EFFECT-CLEANUP'],
-  siSet: ['color:blueviolet', 'SIGNALS-SET'],
-  siModif: ['color:blueviolet', 'SIGNALS-MODIF'],
-  siUpdate: ['color:blueviolet', 'SIGNALS-UPDATE'],
-  siMutate: ['color:blueviolet', 'SIGNALS-MUTATE'],
-  siComputed: ['color:blueviolet', 'SIGNALS-COMPUTED'],
+  signalEffect: ['color:blueviolet', 'SIGNALS-EFFECT'],
+  signalEffectCleanup: ['color:blueviolet', 'SIGNALS-EFFECT-CLEANUP'],
+  signalSet: ['color:blueviolet', 'SIGNALS-SET'],
+  signalModif: ['color:blueviolet', 'SIGNALS-MODIF'],
+  signalUpdate: ['color:blueviolet', 'SIGNALS-UPDATE'],
+  signalMutate: ['color:blueviolet', 'SIGNALS-MUTATE'],
+  signalComputed: ['color:blueviolet', 'SIGNALS-COMPUTED'],
 
   formValueChanges: ['orange', 'FORM-VALUE'],
   formEvent: ['greenyellow', 'FORM-EVENT'],
@@ -195,16 +197,6 @@ export const PLOG_CONFIG_DEFAULT = {
   ti: ['color:green', 'ti'],
   te2e: ['color:green', 'e2e'],
 
-  // colors
-  pink: ['color:#FF40BD;', '############'], // pink flashy
-  red: ['color:red', '############'],
-  orange: ['color:orange', '############'],
-  green: ['color:springgreen', '############'],
-  blue: ['color:cadetblue', '############'],
-  lightBlue: ['color:darkturquoise', '############'],
-  violet: ['color:blueviolet', '############'],
-
-  // same color-loggers with a prefix 'color' (easier to find with intellisense)
   colorPink: ['color:#FF40BD;', '############'], // pink flashy
   colorRed: 'color:red', // red without the console.error() stacktrace
   colorOrange: ['color:orange', '############'],
@@ -222,36 +214,7 @@ export const PLOG_CONFIG_DEFAULT = {
   feature7: ['color:mediumspringgreen', 'FEATURE7'],
   feature8: ['color:greenyellow', 'FEATURE8'],
   feature9: ['color:green', 'FEATURE9'],
-
-  step1: ['color:blueviolet', 'STEP1'],
-  step2: ['color:dodgerblue', 'STEP2'],
-  step3: ['color:blue', 'STEP3'],
-  step4: ['color:deepskyblue', 'STEP4'],
-  step5: ['color:hotpink', 'STEP5'],
-  step6: ['color:deeppink', 'STEP6'],
-  step7: ['color:mediumspringgreen', 'STEP7'],
-  step8: ['color:greenyellow', 'STEP8'],
-  step9: ['color:green', 'STEP9'],
-
-  usecase1: ['color:blueviolet', 'USECASE1'],
-  usecase2: ['color:dodgerblue', 'USECASE2'],
-  usecase3: ['color:blue', 'USECASE3'],
-  usecase4: ['color:deepskyblue', 'USECASE4'],
-  usecase5: ['color:hotpink', 'USECASE5'],
-  usecase6: ['color:deeppink', 'USECASE6'],
-  usecase7: ['color:mediumspringgreen', 'USECASE7'],
-  usecase8: ['color:greenyellow', 'USECASE8'],
-  usecase9: ['color:green', 'USECASE9'],
-
-  event1: ['color:blueviolet', 'EVENT1'],
-  event2: ['color:dodgerblue', 'EVENT2'],
-  event3: ['color:blue', 'EVENT3'],
-  event4: ['color:deepskyblue', 'EVENT4'],
-  event5: ['color:hotpink', 'EVENT5'],
-  event6: ['color:deeppink', 'EVENT6'],
-  event7: ['color:mediumspringgreen', 'EVENT7'],
-  event8: ['color:greenyellow', 'EVENT8'],
-  event9: ['color:green', 'EVENT9'],
+  
 };
 
 ````
