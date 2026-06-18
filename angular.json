@@ -73,6 +73,39 @@
           }
         }
       }
+    },
+    "@gpeel/plog": {
+      "projectType": "library",
+      "root": "projects/gpeel/plog",
+      "sourceRoot": "projects/gpeel/plog/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/gpeel/plog/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/gpeel/plog/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/gpeel/plog/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/gpeel/plog/**/*.ts", "projects/gpeel/plog/**/*.html"],
+            "eslintConfig": "projects/gpeel/plog/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

@@ -1,10 +1,9 @@
 # versions
 
-@gpeel/plog@12.0.0 is the first version migrated for Angular 12, 13 or 14
+- @gpeel/plog@12.0.0 is the first version migrated for Angular 12, 13 or 14
+- @gpeel/plog@17 is the version migrated for Angular 17+
+If you want a version specific for Angular 22+ take  @gpeel/plog@22   but @gpeel/plog@17 work as well. 
 
-Here is the addtional steps used to install the library into this project.
-
-We are now compatible for version 17
 
 # multi CLI Projects
 
@@ -20,6 +19,9 @@ automatically copy assets into your library package as part of the build process
 library needs to publish optional theming files, Sass mixins, or documentation (like a changelog). Learn how to copy
 assets into your library as part of the build. Learn more about how to use the tool to embed assets in CSS.
 
+And now for ng22
+- https://angular.dev/tools/libraries/creating-libraries#ensuring-library-version-compatibility
+
 ## tsconfig
 
 When you import something from a library in an Angular app, Angular looks for a mapping between the library name and a
@@ -29,16 +31,18 @@ library, it has to find the mapping in your tsconfig paths.
 Generating a library with the Angular CLI automatically adds its path to the tsconfig file. The Angular CLI uses the
 tsconfig paths to tell the build system where to find the library.
 
-    "paths": {
-      "@gpeel/plog": [
-      "./dist/gpeel/plog/gpeel-plog",
-      "./dist/gpeel/plog"
-      ]
-    }
+
+      {
+      "compileOnSave": false,
+      "compilerOptions": {
+        "paths": {
+        "@gpeel/plog": ["./dist/gpeel/plog"]
+        },
+
 
 By default, CLI generate the link to the ./dist folder => So you HAVE TO BUILD the lib to test it.
 
-And now you can change that to src with :
+And now you can change that to **src** with :
 
 * MODIFED by Gauthier
 

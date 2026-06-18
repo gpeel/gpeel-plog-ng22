@@ -3,6 +3,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@gpeel/plog": ["./projects/gpeel/plog/src/public-api.ts"]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -26,6 +29,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/gpeel/plog/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/gpeel/plog/tsconfig.spec.json"
     }
   ]
 }
