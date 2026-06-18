@@ -1,59 +1,240 @@
-# GpeelPlogNg22
+# Colorful logs with @gpeel/plog
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 22.0.2
 
-## Development server
+- For Angular 22+ use @gpeel/plog@22 which enabled providePlog(plogConfig) and also keeps PlogModule.forRoot(plogConfig)
+- For Angular 18 to 21 use @gpeel/plog@17 which enabled providePlog(plogConfig) and also keeps PlogModule.forRoot(plogConfig)
+- For Angular 16 use @gpeel/plog 16.6.0
+- For Angular 12 to 15 => use @gpeel/plog 12.2.0
+- For Angular 11.x.y => use @gpeel/plog@11.0.1 (last version for angular 11)
 
-To start a local development server, run:
+npm repo:
+https://www.npmjs.com/package/@gpeel/plog
 
-```bash
-ng serve
-```
+Github repo at :
+https://github.com/gpeel/gpeel-plog-ng22
+https://github.com/gpeel/gpeel-plog-ng17
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+![img.png](colorful.jpg)
 
-## Code scaffolding
+Medium story : https://medium.com/p/62dd10ba3d10/edit
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## INSTALLATION
 
-```bash
-ng generate component component-name
-```
+    npm i @gpeel/plog
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## Example of what you get
 
-## Building
+![img.png](clickable-logs-in-browser.png)
 
-To build the project run:
+### You get obvious **colors** and also keep the **logs clickable** to navigate to your originated source code.
 
-```bash
-ng build
-```
+To get those style the activated loggers have been defined in a file (for example plog-config.ts) as follow:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+````typescript
+export const plogConfig: PlogConfig = {
 
-## Running unit tests
+  createComponent: ['color:green;', 'New-@Comp'],
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+  error: 'color:red; font-size:1rem;',
+  warn: 'color:orange',
+  info: 'color:blue',
+  debug: 'color:limegreen;font-weight:bold',
 
-```bash
-ng test
-```
+  action: ['color:#8f72cf; font-weight:bold;', '@ACTION'], // to log inside Action method
+  tu: ['color:blue; font-size:1rem;', 'TU'],
+  errorState: ['color:#cf3c04', '@ERROR'], // to log error in Store
 
-## Running end-to-end tests
+};
+````
 
-For end-to-end (e2e) testing, run:
+And the result is =>
+![img.png](clickable-logs-code-navigable.png)
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## SETUP for STANDALONE strategy
+Your app.config.ts will typically look like this
 
-## Additional Resources
+````typescript
+import {providePlog} from '@gpeel/plog';
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+export const appConfig: ApplicationConfig = {
+  providers: [
+    providePlog(plogConfig), // this will initialize the logger methods, otherwise no log output done
+    provideRouter(routes)
+  ]
+};
+
+````
+
+## DECLARATION as a MgModule
+
+````typescript
+import {PlogModule} from '@gpeel/plog';
+import {environment} from '../environments/environment';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    PlogModule.forRoot(plogConfig) // <<< HERE, takes into account you loggers definition
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+````
+
+## Default loggers definition
+
+For your developpment you typically would activate much more loggers.
+
+You can find an example of ALL available loggers in PLOG_CONFIG_DEFAULT where all loggers  are activated :
+
+
+````typescript
+export const PLOG_CONFIG_DEFAULT = {
+  debug: 'color:limegreen',
+  info: 'color:blue',
+  error: 'color:red',
+  warn: 'color:orange',
+
+  // Performance logs
+  perf: 'color:darkturquoise',
+  perfComponent: ['color:darkturquoise', 'PERF-¤¤'],
+  perfCD: ['color:darkturquoise', 'PERF-¤¤¤¤¤¤¤'],
+  perfDom: ['color:darkturquoise', 'PERF-¤-¤-¤-¤'],
+
+  // NG hooks
+  ngOnChanges: ['color:orange', 'OnChange'],
+  ngOnInit: ['color:orange', 'OnInit'],
+  ngOnDestroy: ['color:orange', 'OnDestroy'],
+  ngDoCheck: ['color:orange', 'DoCheck'],
+  ngAfterContentInit: ['color:orange', 'AfterContentInit'],
+  ngAfterContentChecked: ['color:orange', 'AfterContentChecked'],
+  ngAfterViewInit: ['color:orange', 'AfterViewInit'],
+  ngAfterViewChecked: ['color:orange', 'AfterViewChecked'],
+
+  // constructor logs
+  create: ['color:green', 'new'],
+  createComponent: ['color:green', 'New-@Comp'],
+  createDirective: ['color:green', 'New-@Dir'],
+  createService: ['color:green', 'New-Svc'],
+  createPipe: ['color:green', 'New-@Pipe'],
+  createGuard: ['color:green', 'New-@Guard'],
+  createResolver: ['color:green', 'New-@Resolver'],
+
+  // NG types
+  resolve: ['color:brown', 'RESOLVE'],
+  guard: ['color:sandybrown', 'GUARD'],
+  validator: 'color:plum',
+  pipe: 'color:brown',
+  callback: 'color:violet',
+
+  state: 'color:blueviolet', // Redux style or BehaviorSubject, as you want
+  // specific logs for NGXS, Akita
+  action: ['color:#8f72cf', '@ACTION'], // to log inside Action method
+  data: ['color:coral', 'DATA'],
+  onAction: ['color:orange', 'ON'], // log for onClick() ... NG event Handlers
+  event: ['color:dodgerblue', 'EVENT'],
+  select: ['color:#84467c', '@SELECT'], // to log inside select method
+  errorState: ['color:#cf3c04', '@ERROR'], // to log error in Store
+  effect: ['color:8F72CF', '@EFFECT'], // to log inside effect method (even if using @Effet is not advised)
+  cache: ['color:blueviolet', 'CACHE'],
+
+  signal: ['color:blueviolet', 'SIGNALS'],
+  signalEffect: ['color:blueviolet', 'SIGNALS-EFFECT'],
+  signalEffectCleanup: ['color:blueviolet', 'SIGNALS-EFFECT-CLEANUP'],
+  signalSet: ['color:blueviolet', 'SIGNALS-SET'],
+  signalModif: ['color:blueviolet', 'SIGNALS-MODIF'],
+  signalUpdate: ['color:blueviolet', 'SIGNALS-UPDATE'],
+  signalMutate: ['color:blueviolet', 'SIGNALS-MUTATE'],
+  signalComputed: ['color:blueviolet', 'SIGNALS-COMPUTED'],
+
+  formValueChanges: ['orange', 'FORM-VALUE'],
+  formEvent: ['greenyellow', 'FORM-EVENT'],
+  streamEvent: ['darkorange', 'STREAM'],
+  subscription: ['coral', 'SUBSCRIBED-DATA'],
+  unsubscription: ['coral', 'UN-SUBSCRIPTION'],
+
+  // Specific loggers for @gpeel/my-validators
+  validationCompute: ['color:orange', '@VALID'], // tracing validators when they compute
+  validationErrorMsgRefresh: ['color:orange', '@VALID_PERF'], // tracing refresh of <my-error-msg>
+  validationErrorMsgCreation: ['color:orange', '@ERROR_MSG_NEW'], // tracing creation of component <my-error-msg>
+  errorMsg: ['color:orange', '@VALID'], // used by <error-msg> deprecated
+
+  // network actions (interceptors)
+  network: ['color:blue', 'HTTP'],
+  networkRequest: ['color:blue', 'HTTP-Request'],
+  networkResponse: ['color:blue', 'HTTP-Response'],
+  networkError: ['color:red', 'HTTP-Error'],
+  networkCreate: ['color:green', 'NEW-HTTP'],
+
+  httpCall: ['color:springgreen', 'HTTP-CALL'], // http prefix : for service logic
+  httpSuccess: ['color:springgreen', 'HTTP-SUCCESS'],
+  httpError: ['color:red', 'HTTP-ERROR'],
+  httpDebug: ['color:springgreen', 'HTTP-TAP'],
+
+  obsSubscribe: ['color:springgreen', 'OBS-sub'],
+  obsSuccess: ['color:springgreen', 'OBS-SUCCESS'],
+  obsError: ['color:red', 'OBS-ERROR'],
+  obsDebug: ['color:springgreen', 'OBS-DEBUG'],
+  obsComplete: ['color:springgreen', 'OBS-COMPLETE'],
+
+  // tests
+  tu: ['color:slateblue', 'tu'],
+  tuBeforeEach: ['color:slateblue', 'tu-BEFORE-EACH'],
+  tuBeforeAll: ['color:slateblue', 'tu-BEFORE-ALL'],
+  tuAfterEach: ['color:tomato', 'tu-AFTER-EACH'],
+  tuAfterAll: ['color:tomato', 'tu-AFTER-ALL'],
+  tuArrange: ['color:blue', 'tu'],
+  tuAct: ['color:blueviolet', 'tu'],
+  tuAssert: ['color:brown', 'tu'],
+  ti: ['color:green', 'ti'],
+  te2e: ['color:green', 'e2e'],
+
+  colorPink: ['color:#FF40BD;', '############'], // pink flashy
+  colorRed: 'color:red', // red without the console.error() stacktrace
+  colorOrange: ['color:orange', '############'],
+  colorGreen: ['color:springgreen', '############'],
+  colorBlue: ['color:cadetblue', '############'],
+  colorLightBlue: ['color:darkturquoise', '############'],
+  colorViolet: ['color:blueviolet', '############'],
+
+  feature1: ['color:blueviolet', 'FEATURE1'],
+  feature2: ['color:dodgerblue', 'FEATURE2'],
+  feature3: ['color:blue', 'FEATURE3'],
+  feature4: ['color:deepskyblue', 'FEATURE4'],
+  feature5: ['color:hotpink', 'FEATURE5'],
+  feature6: ['color:deeppink', 'FEATURE6'],
+  feature7: ['color:mediumspringgreen', 'FEATURE7'],
+  feature8: ['color:greenyellow', 'FEATURE8'],
+  feature9: ['color:green', 'FEATURE9'],
+  
+};
+
+````
+
+To deactivate a logger, simply comment its line.
+
+You can change the CSS (color or anything else), and the prefix.
+
+you can choose the color and the prefix :
+
+        aLogger: [ YourCSS, YourLogPrefix>],
+
+example
+
+        action: ['color:orange', '@ACTION'],
+
+Plog.action("message"); will log
+
+        @ACTION: message
+
+Typescript source codes are delivered inside the installed packge in node_modules/@gpeel/plog/src/lib
+
+
