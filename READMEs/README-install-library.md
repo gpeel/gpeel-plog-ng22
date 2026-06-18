@@ -54,7 +54,7 @@ And now you can change that to **src** with :
 
 You should do it ONCE on your machine:
 
-    $npm login
+    > npm login
     Username: gpeel
     Password:
     Email: (this IS public) your.email@hhh.ccc
