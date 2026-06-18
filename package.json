@@ -2,11 +2,18 @@
   "name": "gpeel-plog-ng22",
   "version": "0.0.0",
   "scripts": {
+    "bump_1_patch": "npm version patch --no-git-tag-version --prefix ./projects/gpeel/plog",
+    "bump_1_minor": "npm version minor --no-git-tag-version --prefix ./projects/gpeel/plog",
+    "bump_1_major": "npm version major --no-git-tag-version --prefix ./projects/gpeel/plog",
+    "build-plog-lib_2": "ng build @gpeel/plog",
+    "cpSources_3": "copyfiles -u 4 -V \"./projects/gpeel/plog/src/**/*.*\" ./dist/gpeel/plog/src",
+    "publish_4": "cd ./dist/gpeel/plog && npm publish --access public ",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "packageManager": "npm@11.13.0",
@@ -24,9 +31,14 @@
     "@angular/build": "^22.0.3",
     "@angular/cli": "^22.0.3",
     "@angular/compiler-cli": "^22.0.0",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "22.0.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^10.3.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
+    "typescript-eslint": "8.60.1",
     "vitest": "^4.0.8"
   }
 }
