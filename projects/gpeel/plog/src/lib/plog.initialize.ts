@@ -1,43 +1,30 @@
-import {APP_INITIALIZER, InjectionToken} from '@angular/core';
+import {provideAppInitializer} from '@angular/core';
 import {Plog, PlogConfig} from './plog.config';
 import {PLOG_CONFIG_DEFAULT} from './PLOG_CONFIG_DEFAULT';
 
 let initialized = false;
-const PLOG_CONFIG = new InjectionToken<any[]>('PLOG_CONFIG');
 
 
-export  function plogProviders(plogConfig: PlogConfig) {
+export function plogProviders(plogConfig: PlogConfig) {
   return [
-    {
-      provide: APP_INITIALIZER, // loop to force execution of rootPlogFactory
-      useFactory: rootPlogFactory,
-      multi: true,
-      deps: [PLOG_CONFIG]
-    },
-    {
-      provide: PLOG_CONFIG,
-      useValue: plogConfig,
-    },
-  ];
-}
-
-export function rootPlogFactory(plogConfig: PlogConfig): (() => void) {
-  return () => {
-    if (!initialized) {
-
-      if (!plogConfig) {
-        console.log('****************************');
-        console.log('YOU DID NOT initialize Plog explicitly =>  Fallback to using the default Plog config');
-        console.log('If you want something else configure your plog-config.ts file');
-        console.log('Example in node_module/@gpeel/plog/src/lib/PLOG_CONFIG_DEFAULT.ts');
-        console.log('****************************');
-        plogConfig = PLOG_CONFIG_DEFAULT;
+    // this replaces APP_INITIALIZER deprecated
+    provideAppInitializer(() => {
+      if (!initialized) {
+        if (!plogConfig) {
+          console.log('****************************');
+          console.log(
+            'YOU DID NOT initialize Plog explicitly =>  Fallback to using the default Plog config',
+          );
+          console.log('If you want something else configure your plog-config.ts file');
+          console.log('Example in node_module/@gpeel/plog/src/lib/PLOG_CONFIG_DEFAULT.ts');
+          console.log('****************************');
+          plogConfig = PLOG_CONFIG_DEFAULT;
+        }
+        initialize(plogConfig);
+        initialized = true;
       }
-
-      initialize(plogConfig);
-      initialized = true;
-    }
-  };
+    }),
+  ];
 }
 
 

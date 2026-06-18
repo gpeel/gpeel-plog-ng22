@@ -5,8 +5,8 @@ import { Plog } from '@gpeel/plog';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet],
-  template: '<h2>{{ title }} app is running!</h2>\n',
+  imports: [CommonModule],
+  template: '<h2>{{ title() }} app is running!</h2>\n',
 })
 export class App {
    title = signal('gpeel-plog-ng22');
