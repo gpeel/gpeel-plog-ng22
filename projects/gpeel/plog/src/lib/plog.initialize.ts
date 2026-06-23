@@ -47,18 +47,14 @@ export function initialize(plogConfig: PlogConfig): void {
     }
     // console.log('KEY', key, color);
     let prefixCapitalized = prefix.charAt(0).toUpperCase() + prefix.slice(1);
-    // padEnd does not exists in IE11
-    // <=> prefixCapitalized.padEnd(5, ' ')
-    if (prefixCapitalized.length < 5) {
-      while (prefixCapitalized.length < 5) {
-        prefixCapitalized = prefixCapitalized + ' ';
-      }
-    }
+    prefixCapitalized = prefixCapitalized.padEnd(5, ' ');
+
     if (color === 'test' || color === 'no-css') {
       (Plog as Indexable)[key] = console.log.bind(console, prefixCapitalized);
 
     } else {
       (Plog as Indexable)[key] = console.log.bind(console, `%c${prefixCapitalized}`, `${color}`);
+      // When the user will use it, the following will be executed =>
       // console.info(`%c${prefixCapitalized}`, `${color}`, "message" )
     }
   });
