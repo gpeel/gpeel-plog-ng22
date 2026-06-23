@@ -15,8 +15,9 @@ export function plogProviders(plogConfig: PlogConfig) {
           console.log(
             'YOU DID NOT initialize Plog explicitly =>  Fallback to using the default Plog config',
           );
-          console.log('If you want something else configure your plog-config.ts file');
-          console.log('Example in node_module/@gpeel/plog/src/lib/PLOG_CONFIG_DEFAULT.ts');
+          console.log('If you want something else configure a local plog-config.ts file');
+          console.log('And initialize Plog with providePlog(plogConfig)');
+          console.log('Default and example is in file node_module/@gpeel/plog/src/lib/PLOG_CONFIG_DEFAULT.ts');
           console.log('****************************');
           plogConfig = PLOG_CONFIG_DEFAULT;
         }
@@ -28,9 +29,7 @@ export function plogProviders(plogConfig: PlogConfig) {
 }
 
 
-interface Indexable {
-  [key: string]: any;
-}
+type Indexable = Record<string, any>;
 
 export function initialize(plogConfig: PlogConfig): void {
 
