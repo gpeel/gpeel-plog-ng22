@@ -8,9 +8,9 @@ export const plogConfig: PlogConfig = {
 
   // Performance logs
   perf: 'color:darkturquoise',
-  perfComponent: ['color:darkturquoise', 'PERF-¤¤'],
-  perfCD: ['color:darkturquoise', 'PERF-¤¤¤¤¤¤¤'],
-  perfDom: ['color:darkturquoise', 'PERF-¤-¤-¤-¤'],
+  perfComponent: ['color:darkturquoise', 'PERF-¤¤¤'],
+  perfCD: ['color:darkturquoise', 'PERF-¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤'],
+  perfDom: ['color:darkturquoise', 'PERF-¤-¤-¤-¤-¤-¤-¤-¤'],
 
   signal: ['color:blueviolet', 'SIGNALS'],
   signalEffect: ['color:blueviolet', 'SIGNALS-EFFECT'],
@@ -115,5 +115,4 @@ export const plogConfig: PlogConfig = {
   feature7: ['color:mediumspringgreen', 'FEATURE7'],
   feature8: ['color:greenyellow', 'FEATURE8'],
   feature9: ['color:green', 'FEATURE9'],
-
 };

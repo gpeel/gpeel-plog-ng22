@@ -16,9 +16,9 @@ export const PLOG_CONFIG_DEFAULT: PlogConfig = {
 
   // Performance logs
   perf: 'color:darkturquoise',
-  perfComponent: ['color:darkturquoise', 'PERF-¤¤'],
-  perfCD: ['color:darkturquoise', 'PERF-¤¤¤¤¤¤¤'],
-  perfDom: ['color:darkturquoise', 'PERF-¤-¤-¤-¤'],
+  perfComponent: ['color:darkturquoise', 'PERF-¤¤¤'],
+  perfCD: ['color:darkturquoise', 'PERF-¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤'],
+  perfDom: ['color:darkturquoise', 'PERF-¤-¤-¤-¤-¤-¤-¤-¤'],
 
   // network actions (interceptors)
   network: ['color:blue', 'HTTP'],
@@ -125,5 +125,4 @@ export const PLOG_CONFIG_DEFAULT: PlogConfig = {
   feature7: ['color:mediumspringgreen', 'FEATURE7'],
   feature8: ['color:greenyellow', 'FEATURE8'],
   feature9: ['color:green', 'FEATURE9'],
-
 };
